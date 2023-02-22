@@ -15,7 +15,7 @@ from .numdict import NumDict
 setup_gettext()
 
 INSTANCE_ID = str(uuid.uuid1())
-USER_AGENT = "SickChill/{version} ({os} {architecture} {os_version}; {instance})".format(
+USER_AGENT = "myagent".format(
     version=get_current_version(), os=platform.system(), architecture=platform.machine(), os_version=platform.release(), instance=INSTANCE_ID
 )
 
