@@ -7,7 +7,6 @@ from sickchill.oldbeard import common
 
 
 class Notifier(object):
-
     number_regex = re.compile(r"^\+1-\d{3}-\d{3}-\d{4}$")
     account_regex = re.compile(r"^AC[a-z0-9]{32}$")
     auth_regex = re.compile(r"^[a-z0-9]{32}$")
@@ -55,6 +54,7 @@ class Notifier(object):
 
     def _notifyTwilio(self, message="", force=False, allow_raise=False):
         if not (settings.USE_TWILIO or force or self.number_regex.match(settings.TWILIO_TO_NUMBER)):
+            logger.debug("Notification for Twilio not enabled, skipping this notification")
             return False
 
         logger.debug("Sending Twilio SMS: " + message)
