@@ -45,7 +45,6 @@ from .system.Shutdown import Shutdown
 
 def initialize(consoleLogging=True):
     with settings.INIT_LOCK:
-
         if settings.__INITIALIZED__:
             return False
 
@@ -814,6 +813,11 @@ def initialize(consoleLogging=True):
             if hasattr(curProvider, "cookies"):
                 curProvider.cookies = check_setting_str(settings.CFG, curProvider.get_id().upper(), curProvider.get_id("_cookies"), censor_log=True)
 
+        message = _(
+            'SickChill support, discussions, bug reports, feature requests, and all other communication is now on <a href="https://discord.gg/FXre9qkHwE">discord (click here)</a> or can be found in the menu under tools>discord. Code and releases will remain on GitHub!'
+        )
+        helpers.add_site_message(message, tag="discord_support", level="success")
+
         providers.check_enabled_providers()
 
         if not os.path.isfile(settings.CONFIG_FILE):
@@ -850,7 +854,6 @@ def initialize(consoleLogging=True):
             (settings.METADATA_TIVO, metadata.tivo),
             (settings.METADATA_MEDE8ER, metadata.mede8er),
         ]:
-
             cur_metadata_config, cur_metadata_module = cur_metadata_tuple
             cur_metadata_class = cur_metadata_module.metadata_class()
             cur_metadata_class.set_config(cur_metadata_config)
@@ -1637,7 +1640,6 @@ def save_config():
 
 
 def launchBrowser(protocol="http", startPort=None, web_root="/"):
-
     try:
         import webbrowser
     except ImportError:
